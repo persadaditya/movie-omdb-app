@@ -1,5 +1,8 @@
-# Kotlin MVVM
-Sample project that implements the MVVM architecture using Kotlin, Data Binding, RxJava2 and Android Architecture Components.
+# Movie OMDB API
+Application that search movie from omdb api then see detail movie
+
+### Kotlin MVVM
+project that implements the MVVM architecture using Kotlin, Data Binding, RxJava2 and Android Architecture Components.
 
 
 ### Library reference resources:
@@ -13,9 +16,22 @@ Sample project that implements the MVVM architecture using Kotlin, Data Binding,
  * DI - contains all the Dagger 2 injection classes.
  * UI - the actual Android UI components, Activities and ViewModels
 
- ## License
+### Starter
+ *check your todo replace your apikey
 
-- Copyright 2018 © Enes Karpuzoğlu.
+### Add another feature
+ #### for data
+ * add your model in /data/model/response
+ * add your endpoint /data/remote/ in ApiHelper
+ * implement your AppRepo /data/repository
+
+ #### for ui
+ * create folder in ui/launch/your_added_feature
+ * create fragment that extend BaseFragment 
+ * crete view model that extend BaseViewModel
+
+
+ ## License
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

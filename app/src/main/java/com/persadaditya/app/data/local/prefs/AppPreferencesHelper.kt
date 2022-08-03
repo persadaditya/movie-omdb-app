@@ -7,13 +7,9 @@ import com.google.gson.JsonParser
 import com.persadaditya.app.R
 import com.persadaditya.app.data.DataManager
 import com.persadaditya.app.di.annotations.PreferenceInfo
-import com.persadaditya.app.data.model.UserModel
 import java.lang.reflect.InvocationTargetException
 import javax.inject.Inject
 
-/**
- * Created by M.Enes on 5/9/2019
- */
 class AppPreferencesHelper @Inject constructor(val context: Context, @PreferenceInfo val prefFileName: String): PreferencesHelper {
 
 
@@ -27,11 +23,6 @@ class AppPreferencesHelper @Inject constructor(val context: Context, @Preference
         mPrefs.edit().putBoolean(context.getString(R.string.PREF_KEY_DARK_THEME),boolean).apply()
     }
 
-    override fun getUser(): UserModel? = getComplex(PREF_KEY_USER, UserModel::class.java)
-    override fun setUser(model: UserModel?) {
-        saveComplex(PREF_KEY_USER,model)
-    }
-
     override fun getCurrentUserLoggedMode(): Int = mPrefs.getInt(PREF_KEY_LOGGED_MODE, DataManager.LoggedMode.LOGGED_OUT.type)
     override fun setCurrentUserLoggedMode(mode: DataManager.LoggedMode?) {
         if (mode != null) {
@@ -41,12 +32,22 @@ class AppPreferencesHelper @Inject constructor(val context: Context, @Preference
         }
     }
 
+    /**
+     * save object to preference
+     * */
     fun <T> saveComplex(key: String, complex: T): Boolean {
         val editor = mPrefs.edit()
         editor.putString(key,  Gson().toJson(complex))
         return editor.commit()
     }
 
+    /**
+    * get object to preference
+     * @param key: to get object based on
+     * @param type: object type that you want
+     *
+     * @return T: object model that you want
+     * */
     @Suppress("UNCHECKED_CAST")
     fun <T> getComplex(key: String, type: Class<T>): T? {
         val data = mPrefs.getString(key, null)

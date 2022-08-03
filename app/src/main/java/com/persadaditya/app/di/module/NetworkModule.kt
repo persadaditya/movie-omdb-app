@@ -18,9 +18,6 @@ import java.io.File
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-/**
- * Created by M.Enes on 5/8/2019
- */
 @Module
 class NetworkModule {
 

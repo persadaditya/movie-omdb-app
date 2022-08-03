@@ -1,5 +1,6 @@
 package com.persadaditya.app.ui.base
 
+import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,17 +10,19 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
+import com.persadaditya.app.view.ProgressDialog
 import dagger.android.support.AndroidSupportInjection
 
-/**
- * Created by M.Enes on 5/15/2019
- */
 abstract class BaseFragment<T:ViewDataBinding,V: BaseViewModel<*>>: Fragment() {
 
     private var mActivity : BaseActivity<*, *>? = null
     private var mRootView : View? = null
     private var mViewDataBinding: T? = null
     private var mViewModel: V? = null
+
+    lateinit var dialog: Dialog
 
     /**
      * Override for set binding variable
@@ -53,6 +56,7 @@ abstract class BaseFragment<T:ViewDataBinding,V: BaseViewModel<*>>: Fragment() {
         performDependencyInjection()
         super.onCreate(savedInstanceState)
         mViewModel = getViewModel()
+        dialog = ProgressDialog.progressDialog(requireContext())
         setHasOptionsMenu(false)
     }
 
@@ -72,6 +76,24 @@ abstract class BaseFragment<T:ViewDataBinding,V: BaseViewModel<*>>: Fragment() {
         mViewDataBinding?.setVariable(getBindingVariable(), mViewModel)
         mViewDataBinding?.lifecycleOwner = this
         mViewDataBinding?.executePendingBindings()
+
+        mViewModel?.loader?.observe(viewLifecycleOwner, Observer {
+            if(it==null) return@Observer
+
+            if(it){
+                dialog.show()
+            } else {
+                dialog.hide()
+            }
+
+        })
+
+        mViewModel?.error?.observe(viewLifecycleOwner, Observer {
+            if(it==null) return@Observer
+
+            Snackbar.make(getViewDataBinding().root, it.message, Snackbar.LENGTH_SHORT).show()
+            mViewModel?.error?.value = null
+        })
     }
 
 

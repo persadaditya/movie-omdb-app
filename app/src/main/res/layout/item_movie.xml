@@ -1,4 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-  
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+                name="model"
+                type="com.persadaditya.app.data.model.response.SearchItem" />
+    </data>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/margin_small"
+            android:layout_marginHorizontal="@dimen/margin_small"
+            >
+        <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                app:cardCornerRadius="@dimen/radius_normal"
+                >
+            <ImageView
+                    android:id="@+id/image_movie"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:contentDescription="@string/movie" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:maxLines="2"
+                tools:text="Movie Name"
+                android:text="@{model.title}"
+                />
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:textStyle="italic"
+                tools:text="Year"
+                android:text="@{model.year}"
+                />
+    </LinearLayout>
 </layout>

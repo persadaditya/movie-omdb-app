@@ -5,9 +5,6 @@ import io.reactivex.Observer
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
-/**
- * Created by M.Enes on 25.04.2019
- */
 abstract class ApiObserver<T> constructor(private val compositeDisposable: CompositeDisposable): Observer<T> {
     override fun onComplete() {
 

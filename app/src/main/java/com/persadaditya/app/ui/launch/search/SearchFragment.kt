@@ -4,20 +4,22 @@ import android.app.Activity
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.persadaditya.app.BR
 import com.persadaditya.app.R
-import com.persadaditya.app.databinding.FragmentLoginBinding
+import com.persadaditya.app.data.model.response.SearchItem
 import com.persadaditya.app.databinding.FragmentSearchBinding
 import com.persadaditya.app.ui.base.BaseFragment
-import com.persadaditya.app.ui.launch.login.LoginNavigator
-import com.persadaditya.app.ui.launch.login.LoginViewModel
+import com.persadaditya.app.ui.launch.search.adapter.SearchAdapter
+import io.reactivex.Scheduler
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(), SearchNavigator {
+class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(), SearchNavigator,
+        (SearchItem) -> Unit {
 
 
     @Inject
@@ -29,13 +31,27 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(), S
         mViewModel.setNavigator(this)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_search, container, false)
-    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        val adapter = SearchAdapter(this)
+        getViewDataBinding().recyclerMovie.apply {
+            this.adapter = adapter
+            this.layoutManager = GridLayoutManager(requireContext(), 2)
+        }
+
+        mViewModel.searchData.observe(viewLifecycleOwner, Observer {
+            if(it==null){
+                getViewDataBinding().tvNoData.visibility = View.VISIBLE
+                adapter.setData(null)
+                return@Observer
+            }
+
+            getViewDataBinding().tvNoData.visibility = View.GONE
+            adapter.setData(it.search)
+
+        })
+    }
 
     override fun getBindingVariable(): Int {
         return BR.viewModel
@@ -56,6 +72,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(), S
 
     override fun context(): Context {
         return requireContext()
+    }
+
+
+    ///on click item
+    override fun invoke(item: SearchItem) {
+        val action = SearchFragmentDirections.actionSearchFragmentToMovieFragment().setMovieId(item.imdbID)
+        findNavController().navigate(action)
     }
 
 }

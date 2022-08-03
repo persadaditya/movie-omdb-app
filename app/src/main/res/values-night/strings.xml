@@ -1,3 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="search_hint">Search your movie here</string>
+    <string name="loading">Loading…</string>
+    <string name="votes">Votes: %s</string>
+    <string name="actors">Actors</string>
+    <string name="writers">Writers</string>
+    <string name="country">Country</string>
+    <string name="language">Language</string>
+    <string name="runtime">Runtime</string>
+    <string name="year_released">Released</string>
+    <string name="search_no_data">Search your movie to see you data</string>
+    <string name="movie">movie</string>
 </resources>

@@ -1,13 +1,298 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         tools:context=".ui.launch.movie.MovieFragment">
 
-    <TextView
+    <data>
+        <variable
+                name="model"
+                type="com.persadaditya.app.data.model.response.MovieResponse" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Hello" />
+            android:orientation="vertical">
 
-</FrameLayout>
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/GhostWhite"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+                />
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="?attr/actionBarSize"
+                android:orientation="vertical">
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:background="@color/GhostWhite"
+                    />
+        </LinearLayout>
+
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="?attr/actionBarSize"
+                >
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                    <androidx.cardview.widget.CardView
+                            android:layout_width="100dp"
+                            android:layout_height="160dp"
+                            app:cardCornerRadius="@dimen/radius_normal"
+                            android:layout_marginTop="70dp"
+                            android:layout_marginStart="@dimen/margin_normal"
+                            >
+                        <ImageView
+                                android:id="@+id/image_movie"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitXY"/>
+                    </androidx.cardview.widget.CardView>
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_gravity="bottom"
+                            android:layout_marginHorizontal="@dimen/margin_small"
+                            android:gravity="bottom">
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                tools:text="Movie Name with very long title"
+                                style="@style/TextAppearance.AppCompat.Headline"
+                                android:maxLines="2"
+                                android:text="@{model.title}"
+                                />
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                tools:text="Genre"
+                                android:text="@{model.genre}"
+                                android:textStyle="italic"
+                                />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginVertical="@dimen/margin_big"
+                        >
+
+                    <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="vertical">
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{model.imdbRating.toString()}"
+                                tools:text="5.4"
+                                style="@style/TextAppearance.AppCompat.Display1"
+                                app:drawableStartCompat="@drawable/ic_round_star_24" />
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                tools:text="Votes 19,189"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:text="@{@string/votes(model.imdbVotes)}"
+                                />
+                    </LinearLayout>
+
+                    <View
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:paddingVertical="@dimen/margin_small"
+                            android:background="@color/FloralWhite"
+                            />
+
+                    <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="vertical">
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{model.runtime}"
+                                tools:text="90 min"
+                                style="@style/TextAppearance.AppCompat.Display1" />
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:text="@string/runtime"
+                                />
+                    </LinearLayout>
+
+                    <View
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:paddingVertical="@dimen/margin_small"
+                            android:background="@color/FloralWhite"
+                            />
+                    <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="vertical">
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{model.year}"
+                                tools:text="2012"
+                                style="@style/TextAppearance.AppCompat.Display1" />
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:text="@string/year_released"
+                                />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/margin_normal"
+                        tools:text="Lorem"
+                        android:text="@{model.plot}"
+                        android:layout_marginHorizontal="@dimen/margin_normal"
+                        />
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginHorizontal="@dimen/margin_normal"
+                        android:layout_marginVertical="@dimen/margin_small">
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/actors"
+                                style="@style/TextAppearance.AppCompat.Body2"
+                                />
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@{model.actors}"
+                                style="@style/TextAppearance.AppCompat.Caption"
+                                tools:text="Stunt 1, Stunt 2"
+                                android:textStyle="italic"
+                                />
+                    </LinearLayout>
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/writers"
+                                style="@style/TextAppearance.AppCompat.Body2"
+                                />
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@{model.writer}"
+                                style="@style/TextAppearance.AppCompat.Caption"
+                                tools:text="Stunt 1, Stunt 2"
+                                android:textStyle="italic"
+                                />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginHorizontal="@dimen/margin_normal"
+                        android:layout_marginVertical="@dimen/margin_small">
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/country"
+                                style="@style/TextAppearance.AppCompat.Body2"
+                                />
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@{model.country}"
+                                style="@style/TextAppearance.AppCompat.Caption"
+                                tools:text="Stunt 1, Stunt 2"
+                                android:textStyle="italic"
+                                />
+                    </LinearLayout>
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/language"
+                                style="@style/TextAppearance.AppCompat.Body2"
+                                />
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@{model.language}"
+                                style="@style/TextAppearance.AppCompat.Caption"
+                                tools:text="Stunt 1, Stunt 2"
+                                android:textStyle="italic"
+                                />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

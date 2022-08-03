@@ -5,8 +5,7 @@ package com.persadaditya.app.utils
  */
 class Urls {
     companion object {
-        const val BASE_URL = "http://192.168.1.218:3000/API/"
+        const val BASE_URL = "https://www.omdbapi.com/"
 
-        const val LOGIN = "API/users/authtoken"
     }
 }

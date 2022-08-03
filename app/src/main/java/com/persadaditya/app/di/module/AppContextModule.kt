@@ -12,11 +12,9 @@ import com.persadaditya.app.di.annotations.PreferenceInfo
 import com.persadaditya.app.utils.AppConstants
 import dagger.Module
 import dagger.Provides
+import io.reactivex.schedulers.TestScheduler
 import javax.inject.Singleton
 
-/**
- * Created by M.Enes on 5/8/2019
- */
 @Module
 class AppContextModule {
 
@@ -41,6 +39,12 @@ class AppContextModule {
     @Singleton
     internal fun provideRepository(appRepo: AppRepo): Repo {
         return appRepo
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideTestScheduler(): TestScheduler{
+        return TestScheduler()
     }
 
     @Provides

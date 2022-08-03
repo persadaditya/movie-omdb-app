@@ -6,11 +6,9 @@ import com.persadaditya.app.data.DataManager
 import com.persadaditya.app.data.model.api.ErrorData
 import com.persadaditya.app.data.repository.AppRepo
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import java.lang.ref.WeakReference
 
-/**
- * Created by M.Enes on 24.04.2019
- */
 open class BaseViewModel<N>(
     val appRepo: AppRepo
 ): ViewModel() {
@@ -20,6 +18,7 @@ open class BaseViewModel<N>(
     val loader: MutableLiveData<Boolean> = MutableLiveData()
     val error: MutableLiveData<ErrorData?> = MutableLiveData()
     var compositeDisposable: CompositeDisposable = CompositeDisposable()
+    var scheduler = Schedulers.io()
 
     fun displayLoader(isLoading: Boolean) {
         loader.value = isLoading

@@ -7,9 +7,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import dagger.android.AndroidInjection
 
-/**
- * Created by M.Enes on 24.04.2019
- */
 abstract class BaseActivity<T: ViewDataBinding,V: BaseViewModel<*>> : AppCompatActivity() {
     private var mViewDataBinding: T? = null
     private var mViewModel: V? = null
