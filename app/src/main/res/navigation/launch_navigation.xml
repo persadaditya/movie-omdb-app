@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/launch_navigation"
+        app:startDestination="@id/splashFragment">
+
+    <fragment
+            android:id="@+id/splashFragment"
+            android:name="com.persadaditya.app.ui.launch.splash.SplashFragment"
+            android:label="SplashFragment" >
+        <action
+                android:id="@+id/action_splash_to_login"
+                app:destination="@id/loginFragment"
+                app:popUpTo="@id/splashFragment"
+                app:popUpToInclusive="true"
+                />
+        <action
+                android:id="@+id/action_splashFragment_to_searchFragment"
+                app:destination="@id/searchFragment" />
+
+    </fragment>
+    <fragment
+            android:id="@+id/loginFragment"
+            android:name="com.persadaditya.app.ui.launch.login.LoginFragment"
+            android:label="LoginFragment" >
+    </fragment>
+    <fragment
+            android:id="@+id/searchFragment"
+            android:name="com.persadaditya.app.ui.launch.search.SearchFragment"
+            android:label="SearchFragment" />
+</navigation>
